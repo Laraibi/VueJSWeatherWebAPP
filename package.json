@@ -11,9 +11,11 @@
     "@popperjs/core": "^2.9.2",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
+    "chart.js": "^3.5.0",
     "core-js": "^3.6.5",
     "moment": "^2.29.1",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue3-chart-v2": "^0.8.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
