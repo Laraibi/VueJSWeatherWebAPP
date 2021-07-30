@@ -1,28 +1,67 @@
 <template>
   <div class="row .overflow-auto">
-    <div class="col-3 my-2" v-for="(city, key) in citiesList" :key="key">
-      <citycard @changeCity="handleSelctedCity" :name="city.name" />
-    </div>
-    <div class="col-3 my-2">
+    <div class="col-6">
       <div class="row">
-        <div class="col-10">
-          <input
-            type="text"
-            v-model.lazy="selctedCity"
-            id=""
-            class="form-control"
-            placeholder="City,Country"
-          />
+        <div class="col" v-for="(city, key) in citiesList" :key="key">
+          <citycard @changeCity="handleSelctedCity" :name="city.name" />
         </div>
-        <button class="btn btn-success col-2">
-          <i class="bi bi-search"></i>
-        </button>
       </div>
+    </div>
+    <div class="col-6">
       <div class="row">
-        <div class="col-12">
-          <select name="" id="" class="form-select" @change="handleSelctedCity" v-model="selctedCity">
-              <option v-for="historyitem,key in history" :key="key" :value="historyitem">{{historyitem}}</option>
-          </select>
+        <div class="col">
+          <div class="row">
+            <div class="col-10">
+              <input
+                type="text"
+                @change="handleSelctedCity"
+                v-model.lazy="selctedCity"
+                id=""
+                class="form-control"
+                placeholder="City,Country"
+              />
+            </div>
+            <div class="col-2">
+              <button class="btn btn-outline-success">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h6 class="card-title">Historique</h6>
+                </div>
+                <div class="card-body">
+                  <select
+                    name=""
+                    id=""
+                    class="form-select"
+                    @change="handleSelctedCity"
+                    v-model="selctedCity"
+                  >
+                    <option
+                      v-for="(historyitem, key) in history"
+                      :key="key"
+                      :value="historyitem"
+                    >
+                      {{ historyitem }}
+                    </option>
+                  </select>
+                  <ul class="list-group">
+                    <li
+                      v-for="(historyitem, key) in history"
+                      :key="key"
+                      class="list-group-item"
+                    >
+                      {{ historyitem }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -37,11 +76,11 @@ export default {
   components: {
     citycard,
   },
-  props:{
-    history:{
-      type:Array,
-      value:[]
-    }
+  props: {
+    history: {
+      type: Array,
+      value: [],
+    },
   },
   data() {
     return {
@@ -51,14 +90,14 @@ export default {
     };
   },
   methods: {
-    handleSelctedCity(name=this.selctedCity) {
+    handleSelctedCity(name = this.selctedCity) {
       // console.log(typeof name);
-      if(typeof name === "object"){
+      if (typeof name === "object") {
         this.selctedCity = name.target.value;
-      }else{
+      } else {
         this.selctedCity = name;
       }
-      this.$emit("handleSelctedCity",  this.selctedCity);
+      this.$emit("handleSelctedCity", this.selctedCity);
     },
   },
   created() {

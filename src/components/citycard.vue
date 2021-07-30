@@ -1,14 +1,8 @@
 <template>
-  <div class="card pointer">
-    <div class="card-header">
-      <h6 class="card-title">{{ name }}</h6>
-    </div>
-    <div class="card-body">
-      <button class="btn btn-warning" @click="changeSelectedCity">
-        click me
-      </button>
-      <img src='' alt="" />
-    </div>
+  <div class="">
+    <h6 class="card-title btn btn-outline-info text-nowrap" @click="changeSelectedCity">
+      {{ name }}
+    </h6>
   </div>
 </template>
 
@@ -20,7 +14,6 @@ export default {
       type: String,
       value: "",
     },
-    
   },
   methods: {
     changeSelectedCity() {

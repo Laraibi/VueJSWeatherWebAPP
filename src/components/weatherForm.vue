@@ -1,11 +1,8 @@
 <template>
   <div>
-    <div class="row">
-      <citiesgrid @handleSelctedCity="handleSelctedCity" :history="history" />
-    </div>
     <div class="row" id="table" v-if="city.length > 0">
-      <div class="col-lg-3 col-sm-6 h-100">
-        <div class="card h-100">
+      <div class="col-lg-3 col-sm-4">
+        <div class="card">
           <div class="card-header">
             <h6 class="card-title">{{ city }},{{ weatherData.sys.country }}</h6>
           </div>
@@ -44,16 +41,19 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-9">
+      <div class="col-lg-9 col-sm-8">
         <div class="card">
           <div class="card-header">
-            <h6 class="card-title">Previsions pendant 5 prochaines jours</h6>
+            <h6 class="card-title">Previsions pendant 5 prochains jours</h6>
           </div>
           <div class="card-body">
             <line-chart :chartData="chartData" />
           </div>
         </div>
       </div>
+    </div>
+    <div class="row">
+      <citiesgrid @handleSelctedCity="handleSelctedCity" :history="history" />
     </div>
   </div>
 </template>
@@ -121,7 +121,11 @@ export default {
       // this.history.push(name)
       this.city = name;
       this.load().then(() => {
-        this.loadForcast().then(()=>(this.history.push(this.city)));        
+        this.loadForcast().then(() => {
+          if (!this.history.includes(this.city)) {
+            this.history.push(this.city);
+          }
+        });
       });
       // ;
     },
@@ -165,7 +169,7 @@ export default {
                 },
               ],
             };
-             resolve();
+            resolve();
           });
       });
     },
@@ -173,12 +177,4 @@ export default {
 };
 </script>
 <style>
-.row#table {
-  display: table !important;
-}
-.row#table [class*="col-"] {
-  float: none !important;
-  display: table-cell !important;
-  vertical-align: top !important;
-}
 </style>
